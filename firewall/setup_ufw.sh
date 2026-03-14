@@ -31,4 +31,4 @@ sudo ufw allow from 192.168.50.4 to any
 echo "=== UFW Status ==="
 sudo ufw status verbose
 
-echo "=== Configuration terminée ✅ ==="
+echo "=== Configuration terminée  ==="
