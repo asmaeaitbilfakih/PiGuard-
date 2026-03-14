@@ -1,1 +1,32 @@
+# ================================
+# PiGuard - ACL Configuration
+# Auteure: Hanane
+# ================================
 
+# RÈGLES ACL APPLIQUÉES
+# ----------------------
+
+# 1. SSH (port 22)
+#    Action : LIMIT (anti brute force)
+#    From   : Anywhere
+
+# 2. Telnet (port 23)
+#    Action : DENY
+#    From   : Anywhere
+#    Raison : Protocole non sécurisé, attaque IoT courante
+
+# 3. MQTT (port 1883)
+#    Action : DENY
+#    From   : Anywhere
+#    Raison : Protocole IoT, accès non autorisé bloqué
+
+# 4. Accès autorisé
+#    Action : ALLOW
+#    From   : 192.168.50.4 (PC Hanane)
+#    To     : Anywhere
+
+# RÉSEAU
+# ------
+# Pi IP     : 192.168.50.2
+# PC IP     : 192.168.50.4
+# Interface : eth0
