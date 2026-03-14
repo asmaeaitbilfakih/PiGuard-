@@ -21,3 +21,5 @@ sudo iptables-save > /etc/iptables/rules.v4
 
 echo "=== iptables configuré  ==="
 sudo iptables -L -n --line-numbers | head -20
+#sudo mkdir -p /etc/iptables
+#sudo iptables-save | sudo tee /etc/iptables/rules.v4
