@@ -14,3 +14,17 @@ alert tcp any any -> $HOME_NET 23 (msg:"TELNET IoT Attack Detected"; flow:to_ser
 
 # Règle 4 : Détection accès MQTT non autorisé
 alert tcp any any -> $HOME_NET 1883 (msg:"Unauthorized MQTT Access"; flow:to_server,established; sid:1000004; rev:1;)
+# Règle 5 : DoS — ICMP flood
+alert icmp any any -> $HOME_NET any (msg:"DoS ICMP Flood Detected"; threshold: type threshold, track by_src, count 50, seconds 1; sid:1000005; rev:1;)
+
+# Règle 6 : DDoS — SYN flood massif multi-sources
+alert tcp any any -> $HOME_NET any (msg:"DDoS SYN Flood Detected"; flags:S; threshold: type threshold, track by_dst, count 100, seconds 1; sid:1000006; rev:1;)
+
+# Règle 7 : Ransomware — connexion SMB suspecte (port 445)
+alert tcp any any -> $HOME_NET 445 (msg:"Ransomware SMB Lateral Movement"; threshold: type threshold, track by_src, count 10, seconds 5; sid:1000007; rev:1;)
+
+# Règle 8 : XSS — injection dans requête HTTP
+alert http any any -> $HOME_NET any (msg:"XSS Injection Attempt"; http.uri; content:"<script>"; nocase; sid:1000008; rev:1;)
+
+# Règle 9 : SQL Injection — pattern dans HTTP
+alert http any any -> $HOME_NET any (msg:"SQL Injection Attempt"; http.uri; content:"union select"; nocase; sid:1000009; rev:1;)
